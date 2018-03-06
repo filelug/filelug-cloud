@@ -1,0 +1,15 @@
+{
+  "APNS_SANDBOX": {
+    "transfer-key": "B25614C0DC5F84A08C55E66DA1B23B6710EEF8BCB83637FBF309BC14112185BD0BDA5C6220D3F324F975204DEE5D2CAD6A3139F45BEDC6B1FAA54EC0D12FB9F2+fa8ce03c1259f52ccbc689f5c3c2d18f+up+3A055614-9E36-4A88-ADC7-181D514435A8",
+    "transfer-status": "success",
+    "aps": {
+      "sound": "default",
+      "alert": {
+        "body": "檔案「IMG_7020.mp4」已成功上傳。",
+        "title": "檔案已成功上傳"
+      },
+      "badge": 1
+    },
+    "fl-type": "upload-file"
+  }
+}

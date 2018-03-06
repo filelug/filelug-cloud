@@ -1,0 +1,179 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Upload File（第 3 版）</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Upload File From Device（第 3 版，支援上傳續傳）</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/dupload3</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        <blockquote>
+                            從 device 端上傳檔案內容到 server，再由 server 同步傳輸到 desktop。
+                            上傳內容只包含檔案raw data，其他資訊使用http header傳送，包含：
+                            <ul>
+                                <li>client session：<br>記錄於「Authorization」</li>
+                                <li>上傳檔案key：<br>記錄於「upkey」</li>
+                                <li>上傳目錄路徑：<br>記錄於「updir」。此路徑值包含子目錄（若有設定子目錄），並經過 Base64 加密。</li>
+                                <li>上傳檔案名稱：<br>記錄於「upname」，此值為 Base64 加密後的檔案名稱。</li>
+                                <li>
+                                    上傳檔案大小（in byte）：<br>
+                                    記錄於「upsize」。不論是否為續傳，此值為檔案總大小，而不是續傳部分的檔案大小。
+                                    若要紀錄續傳部分的檔案大小，應記錄於 header「Content-Length」中，但是 server 不處理此值，不需要提供。
+                                </li>
+                                <li>
+                                    上傳檔案最後修改日期： <br>
+                                    記錄於「File-Last-Modified」，例如「File-Last-Modified: 1470034528732」，
+                                    日期格式為 timestamp (in milli-second)。
+                                    此值不論續傳與否，都一定要存在，且值弊大於 0。
+                                </li>
+                                <li>
+                                    上傳檔案範圍（in byte）： <br>
+                                    記錄於「File-Range」，例如「File-Range: bytes=32768-」，表示該服務 http body 內容的第一個 byte 為
+                                    該檔案位元的第 32768 個 index，即第 32769 個 byte。
+                                    此值只有當此上傳檔案為續傳時才會存在，而且一定要存在。
+                                </li>
+                                <li>
+                                    是否僅要求 desktop 接收檔案：<br>
+                                    紀錄於「uploaded_but_uncomfirmed」，例如：「uploaded_but_uncomfirmed: 1」。
+                                    只有當「uploaded_but_uncomfirmed」的值為「1」，才表示
+                                    上次傳輸已經成功將檔案內容全部成功上傳至 server 的暫存檔，但是因為 desktop 連不上而導致失敗。
+                                    當「uploaded_but_uncomfirmed」的值為「1」時，client 端不需要上傳任何檔案內容，
+                                    但是需要在 header 中提供上述除了「File-Range」的資訊以供驗證，server 端會忽略「File-Range」的值。
+                                </li>
+                            </ul>
+                            當檔案內容成功上傳到server後，就回傳status 200，就算是續傳成功也是回傳 status 200，而不是 206。<br>
+                            但是若檔案全部上傳到 server 前就失敗，回傳錯誤碼：500。sever 此時會記錄該檔案已經上傳的位元數，下次上傳同一的檔案前，client 應先調用服務
+                            <a href="findFileUploadedByTransferKey.html">findFileUploadedByTransferKey</a>，取得 server 已經儲存的檔案大小與來源檔最後修改日期，
+                            藉此判斷來源檔是否已經變更，以及「File-Range」的值要填多少，然後再調用此服務，續傳檔案。
+                        </blockquote>
+                        <br>
+                        <blockquote>
+                            原本在調用 <a href="uploadFileFromDevice2.html">uploadFileFromDevice2（第二版）</a> 時，
+                            要先調用 <a href="replaceFileUpload.html">replaceFileUpload</a> 換掉在同一個 upload group 下就的 transfer key，
+                            但是調用此第三版服務前不可以再調用 <a href="replaceFileUpload.html">replaceFileUpload</a>，
+                            因為續傳時需要使用舊的 transfer key 驗證起始傳輸位元與檔案最後修改日期，若非續傳，server 也會變更該筆上傳的相關欄位後再開始接收上傳資料，因此 client 也不再需要在續傳檔案前產生新的 transfer key。
+                            若上傳前仍然調用 <a href="replaceFileUpload.html">replaceFileUpload</a> 換掉在同一個 upload group 下就的 transfer key，若是續傳，會因為找不到舊的 transfer key 而失敗。
+                        </blockquote>
+                        <br>
+                        <blockquote>
+                            因網路不穩定導致需要重新傳送時，client 應先調用服務
+                            <a href="findFileUploadedByTransferKey.html">findFileUploadedByTransferKey</a>，取得 server 已經儲存的檔案大小與來源檔最後修改日期，
+                            藉此判斷來源檔是否已經變更，以及「File-Range」的值要填多少，然後再調用此服務，續傳檔案。
+                        </blockquote>
+                        <br>
+                        <blockquote>
+                            此服務與第 2 版不同在於支援檔案上傳續傳。續傳的依據，是看 request header 是否包含「File-Range」。
+                        </blockquote>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值說明</div>
+            <p>
+                若用戶檔案上傳完成前就失敗，回傳狀態值 500，則 response header「可能」會包含「File-Range」（範例：「File-Range: bytes=0-32767」），說明檔案已部分上傳的資訊。
+                然而，用戶續傳前，還是必須先調用服務 <a href="findFileUploadedByTransferKey.html">findFileUploadedByTransferKey</a>，
+                取得 server 已經儲存的檔案大小與來源檔最後修改日期，藉此判斷來源檔是否已經變更，以及「File-Range」的值要填多少，然後再調用此服務，續傳檔案。
+            </p>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        可能的情況如下：
+                        <ul>
+                            <li>未提供上傳檔案key、上傳目錄、檔案名稱、檔案大小、檔案最後修改日期。</li>
+                            <li>上傳目錄不存在於連線電腦</li>
+                            <li>若為續傳（「File-Range」存在且值不是「byte=0-」），且 upkey 的值找不到對應的檔案上傳資訊。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        沒有client session id或者找不到client session id對應的HttpServletResponse。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">可用傳輸量小於檔案大小。須先儲值後再重新執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">409</td>
+                    <td class="tableRow">
+                        若續傳（即 request header 中包含「File-Range」）時，server 偵測到其所記錄的
+                        「儲存目錄」、「檔案名稱」、「檔案大小」、「已傳送檔案大小」、「來源檔案最後修改日期」這五個其中一個與 request headers 傳入的值不同時，回傳錯誤碼 409。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">466</td>
+                    <td class="tableRow">
+                        Device端軟體版本較舊，Desktop版本較新。
+                        Device收到此錯誤碼，應該提示使用者更新Device APP。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">470</td>
+                    <td class="tableRow">檔案超過單一檔案上傳大小限制。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">500</td>
+                    <td class="tableRow">檔案傳輸前，或者檔案傳輸過程發生其他錯誤。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                則回傳錯誤訊息碼401（Unauthorized）。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

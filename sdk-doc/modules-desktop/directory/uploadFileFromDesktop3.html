@@ -1,0 +1,103 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Upload File From Desktop (V3)</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Upload File From Desktop (V3)</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/supload3</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        上傳檔案內容給 server，即 Device 端下載檔案時，Desktop 端使用此服務上傳檔案。
+                        此服務與 V2 版本不同在於此服務需要在 header 中提供 desktop session id 與 file transfer key 兩項資訊。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        沒有 file transfer key 或者找不到 file transfer key 對應的資料。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        desktop session id 已經過期。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        找不到 desktop session id 對應的 session 或 user 資訊。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">500</td>
+                    <td class="tableRow">
+                        尚未傳輸給前端時就發生其他錯誤。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        device 端等待的 response 物件已經不可使用。可能是因為 device 端程序被取消或者某些因素造成該 response 物件已經被回傳而不能在被使用。desktop 端收到此回覆，不需要做事。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ul>
+                    <li>
+                        必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言)
+                        或者 header「Authorization」(對非 iOS 而言) 的值。
+                    </li>
+                    <li>
+                        在 header「upkey」中提供 file transfer key 的值。
+                    </li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

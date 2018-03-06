@@ -1,0 +1,177 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>findCountryCodesByLocale</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">findCountryCodesByLocale</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">系統</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">取得所有支援的電話國碼資訊。依據指定語系顯示國家名稱。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">所有支援的電話國碼資訊</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/system/country</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "ccode-locale" : "zh_TW"
+}
+            </pre>
+
+            <div class="sectionHead">參數</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">locale</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者 locale</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+[
+    {
+        "country-code":886,
+        "country-id":"TW",
+        "country-name":"臺灣",
+        "phone-sample":"0975000123"
+    },
+    {
+        "country-code":86,
+        "country-id":"CN",
+        "country-name":"中國",
+        "phone-sample":"13053172829"
+    },
+    {
+        "country-code":65,
+        "country-id":"SG",
+        "country-name":"新加坡",
+        "phone-sample":"09334603697"
+    },
+    {
+        "country-code":1,
+        "country-id":"US",
+        "country-name":"美國",
+        "phone-sample":"9708146733"
+    },
+    {
+        "country-code":44,
+        "country-id":"GB",
+        "country-name":"英國",
+        "phone-sample":"07745352515"
+    } ,
+    {
+        "country-code":852,
+        "country-id":"HK",
+        "country-name":"香港",
+        "phone-sample":"69701700"
+    }
+]
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">code</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">電話國碼</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">country</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">國家名稱</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">404</td>
+                    <td class="tableRow">
+                        未指定ccode-locale的值。
+                        為減少不必要的攻擊，將參數名稱取成這樣，並規定一定要有值。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                （無）
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

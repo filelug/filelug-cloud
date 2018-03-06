@@ -1,0 +1,198 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Request Connection</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Request Connection Between Repository and Desktop</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">服務編號</td>
+                    <td class="tableRow">1001</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/user/reconnect</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        要求建立Repository與Desktop間的連線
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+  "user-computer-id" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340|79879797"
+  "user-id" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+  "computer-id" : 79879797,
+  "computer-group" : "GENERAL",
+  "computer-name" : "ALBERT'S WORKSTATION",
+  "lug-server-id":"repo1"
+}
+            </pre>
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">user-computer-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者電腦編號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">user-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者帳號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-id</td>
+                    <td class="tableRow">long</td>
+                    <td class="tableRow">連線電腦編號</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-admin-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">連線電腦管理員的使用者編號</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-name</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">連線電腦名稱</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-group</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">連線電腦所屬群組</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">lug-server-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        指定連線的lug server子網域名稱。例如：「r1」表示指定連線的lug server為「r1.filelug.com」。
+                        基於測試用，若回傳的 lug-server-id 值為「aa」，表示直接連到「filelug.com」。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        找不到相關的使用者電腦資料。通常是因為desktop已經更改電腦名稱，
+                        client端收到此訊息碼應該要求使用者重新登錄。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        session 已過期（預設有效期間為 60 分鐘，自上一次使用此 session id 調用服務的時間開始計算）。
+                        <br>
+                        收到此回傳值，前端應調用服務 <a href="../auth/loginWithSessionId.html">loginWithSessionId</a> 取回新的 session id 後再重新調用此服務。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端應提示用戶使用 Facebook Account Login 重新登入。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ol>
+                    <li>
+                        必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                        系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                        若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                        則回傳錯誤訊息碼401（Unauthorized）。
+                    </li>
+                    <li>
+                        當回傳狀態為 200 (OK) 時，表示要求成功，或者已經要求過，尚在處理中。
+                    </li>
+                    <li>
+                        若發生其他錯誤，回傳狀態為 500（INTERNAL SERVER ERROR）。
+                    </li>
+                </ol>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

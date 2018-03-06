@@ -1,0 +1,16 @@
+{
+  "names": [
+    "upload-directory",
+    "upload-subdirectory-type",
+    "upload-subdirectory-value",
+    "upload-description-type",
+    "upload-description-value",
+    "upload-notification-type",
+    "download-directory",
+    "download-subdirectory-type",
+    "download-subdirectory-value",
+    "download-description-type",
+    "download-description-value",
+    "download-notification-type"
+  ]
+}

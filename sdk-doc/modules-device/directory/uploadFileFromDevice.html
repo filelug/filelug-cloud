@@ -1,0 +1,118 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Upload File</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Upload File From Device</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/dupload</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        從device端上傳檔案內容到repository，再由repository同步傳輸到server。
+                        上傳內容只包含檔案raw data，其他資訊使用http header傳送，包含：
+                        <ul>
+                            <li>client session: 記錄於「Authorization」</li>
+                            <li>上傳檔案key：記錄於「upkey」</li>
+                            <li>上傳目錄路徑：記錄於「updir」，此值為 Base64 加密後的上傳路徑</li>
+                            <li>上傳檔案路徑：記錄於「upname」，此值為 Base64 加密後的檔案名稱</li>
+                            <li>上傳檔案大小（in byte）：記錄於「upsize」</li>
+                        </ul>
+                        當檔案內容成功上傳到server後，就回傳status 200
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        未提供上傳目錄或檔案路徑、或者目錄不存在。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        沒有client session id或者找不到client session id對應的HttpServletResponse。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">可用傳輸量小於檔案大小。須先儲值後再重新執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">409</td>
+                    <td class="tableRow">
+                        檔案重複傳送。<br>
+                        網路斷斷續續時，有的clients會自動重新傳送，但是原來已經送出的資料並沒有被取消，仍然繼續傳送，造成Desktop產生多個上傳檔案。
+                        因此repository若發現上傳檔案key值已經存在，即回傳此錯誤碼，檔案不會傳送到Desktop端。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">466</td>
+                    <td class="tableRow">
+                        Device端軟體版本較舊，Desktop版本較新。
+                        Device收到此錯誤碼，應該提示使用者更新Device APP。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">470</td>
+                    <td class="tableRow">檔案超過單一檔案上傳大小限制。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">500</td>
+                    <td class="tableRow">
+                        檔案傳輸前，或者檔案傳輸過程發生其他錯誤。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">（無）</div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

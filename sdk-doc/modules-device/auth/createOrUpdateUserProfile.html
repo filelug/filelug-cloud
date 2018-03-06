@@ -1,0 +1,138 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Create or Update User Profile</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">新建或更新使用者基本資料</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">新建或更新使用者基本資料，包含 email 與暱稱。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">無。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/user/uprofile</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "email" : "jellyfish@example.com",
+    "nickname" : "Jellyfish"
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">email</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        使用者Email。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">暱稱</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow" colspan="3">無</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        可能的情況：
+                        <ul>
+                            <li>電子郵件地址未提供</li>
+                            <li>暱稱未提供</li>
+                            <li>電子郵件地址不是email格式</li>
+                            <li>新電子郵件地址與目前的相同</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        session 已過期（預設有效期間為 60 分鐘，自上一次使用此 session id 調用服務的時間開始計算）。
+                        <br>
+                        收到此回傳值，前端應調用服務 <a href="../auth/loginWithSessionId.html">loginWithSessionId</a> 取回新的 session id 後再重新調用此服務。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端應提示用戶使用 Facebook Account Login 重新登入。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ul>
+                    <li>
+                        必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。
+                    </li>
+                    <li>
+                        成功調用此服務後，若回傳成功（200），則同一組電話號碼的 Account Kit 屬性「need-create-or-update-user-profile」的值會被設為「false」，此值用於服務 <a href="loginWithAuthorizationCode.html">LoginWithAuthorizationCode</a> 的回傳值。
+                        <br>
+                        下次前端使用同一組電話號碼調用服務 <a href="loginWithAuthorizationCode.html">LoginWithAuthorizationCode</a> 其回傳值「need-create-or-update-user-profile」即為「false」，直到該用戶帳號被刪除後，
+                        再調用服務 <a href="loginWithAuthorizationCode.html">LoginWithAuthorizationCode</a> 的回傳值「need-create-or-update-user-profile」才會又是「true」。
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

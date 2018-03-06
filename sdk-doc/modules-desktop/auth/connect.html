@@ -1,0 +1,276 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>repository desktop API: connect</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">connect</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">服務編號</td>
+                    <td class="tableRow">1001</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">ws://&lt;domain&gt;:&lt;port&gt;/crepo/connect</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        desktop 建立與 repository 的 socket 連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "sid" : 1001,
+    "account" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "passwd" : "81dc9bdb52d04dc20036dbd8313ed055",
+    "nickname" : "Jellyfish",
+    "verification" : "bf94b4d1c5305b5b3f96abdab89eba05b994ea10a249aaa3acb28aa13533040cc4b24cec2783fc3402011f3a52065c16",
+    "computer-id" : 3837763637383939,
+    "lug-server-id" : "r1",
+    "sysprops" :
+    {
+        "desktop.version": "2.0.0",
+        "desktop.locale": "zh_TW",
+        "file.encoding": "MacRoman",
+        "java.vm.info": "mixed mode",
+        "user.dir": "/Users/user1/projects/clopuccino",
+        "line.separator": "\n",
+        "user.name": "user1",
+        "user.home": "/Users/user1",
+        "java.home": "/Library/Java/JavaVirtualMachines/jdk1.7.0_40.jdk/Contents/Home",
+        "java.class.version": "51.0",
+        "user.language": "zh",
+        "sun.jnu.encoding": "MacRoman",
+        "java.io.tmpdir": "/var/folders/42/0xh_py3d4zs2dgbt2pdfybzh0000gn/T/",
+        "file.separator": "/",
+        "java.vm.vendor": "Apple Inc.",
+        "java.specification.version": "1.7",
+        "java.runtime.version": "jdk1.7.0_40",
+        "user.timezone": "Asia/Taipei",
+        "java.vendor": "Apple Inc.",
+        "sun.io.unicode.encoding": "UnicodeLittle",
+        "os.arch": "x86_64",
+        "path.separator": ":",
+        "os.name": "Mac OS X",
+        "os.version": "10.8.5",
+        "java.version": "1.7.0_40",
+        "user.country": "TW"
+    }
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">sid</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">服務編號</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">account</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者帳號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">passwd</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者密碼。此密碼為SHA-256加密後的密碼</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者暱稱</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">verification</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">驗證碼。用來確認此服務是由使用者經由授權的device執行，而不是機器在執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-id</td>
+                    <td class="tableRow">long</td>
+                    <td class="tableRow">連線電腦編號</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">lug-server-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        指定連線的lug server子網域名稱。例如：「r1」表示指定連線的lug server為「r1.filelug.com」。
+                        若回傳值回空值或者lug-server-id不存在，則表示指定連線的lug server為「filelug.com」。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">sysprops</td>
+                    <td class="tableRow">JSON object</td>
+                    <td class="tableRow">desktop（Ex. PC）主機上調用System.getProperties()的回傳值</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "sid" : 1001,
+    "status" : 200,
+    "operatorId" : "TW-0975009123",
+    "error" : "",
+    "timestamp" : 1386505788544, // date time in millis
+    "user" :
+    {
+        "account" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+        "nickname" : "Jellyfish"
+    }
+}
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">status</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">
+                        執行結果狀態碼。此值模仿一般 HTTP 回傳值，200 表示成功建立連線。非 2XX 表示建立連線失敗，可能情況如下所示。詳細錯誤訊息記錄於 error 參數值。
+
+                        <div class="cellSectionHead">建立連線失敗狀態碼</div>
+                        <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                            <tr>
+                                <td class="cellTableHeader" width="10%">訊息碼</td>
+                                <td class="cellTableHeader">說明</td>
+                            </tr>
+                            <tr>
+                                <td class="tableColumn" width="10%">400</td>
+                                <td class="tableRow">
+                                    sid、使用者帳號、或密碼沒有提供。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tableColumn" width="10%">401</td>
+                                <td class="tableRow">
+                                    使用者密碼錯誤。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tableColumn" width="10%">403</td>
+                                <td class="tableRow">使用者帳號尚未註冊或者已註冊但是尚未驗證。</td>
+                            </tr>
+                            <tr>
+                                <td class="tableColumn" width="10%">404</td>
+                                <td class="tableRow">
+                                    sid值不是1001，該服務不支援。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tableColumn" width="10%">460</td>
+                                <td class="tableRow">
+                                    此電腦不存在。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tableColumn" width="10%">467</td>
+                                <td class="tableRow">
+                                    使用者必須變更電話號碼才能繼續使用。
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">sid</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">服務編號</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">error</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        建立連線失敗的錯誤訊息。只有當 status 值<b>不為</b> 200 時才會有值。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">operatorId</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        與 repository 建立連線的 operator 帳號。通常為使用者帳號。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        使用者暱稱。此值不一定與Request參數的nickname一樣。此值是來自於repository資料庫中的值。
+                        若別的Desktop使用此帳號，並更新nickname，則此值即回此更新後的nickname。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">timestamp</td>
+                    <td class="tableRow">long</td>
+                    <td class="tableRow">連線建立時間戳記。單位為毫秒（millisecond）。只有當 status 值為 200 時才會有值。</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ol>
+                    <li>與 repository 建立連線後取得的 session id 作為後續調用其他 repository 服務時，作為 JSON 的 sessionId 值。</li>
+                    <li>一個帳號對應最多一個 session id，且最多只會有一條與 repository 的連線。</li>
+                    <li>若連線過程發生錯誤，repository 會主動關閉與 desktop 之間的連線。</li>
+                </ol>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>電腦模組</title>
+</head>
+<body>
+
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">電腦模組</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="../index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="txt">
+                <a href="#查詢電腦資訊">[查詢電腦資訊]</a>
+                <a href="#異動電腦資訊">[異動電腦資訊]</a>
+            </div>
+
+            <div class="sectionHead"><a name="查詢電腦資訊">查詢電腦資訊</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                    <td width="20%" class="tableColumn">連線伺服器類型</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="findAvailableComputers.html" target="_blank">findAvailableComputers（V1）</a></td>
+                    <td class="tableRow">
+                        取得指定使用者可使用的desktop電腦資訊。若用戶尚未設定任何電腦，則回傳空值。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="findAvailableComputers2.html" target="_blank">findAvailableComputers2（V2）</a></td>
+                    <td class="tableRow">
+                        取得指定使用者可使用的desktop電腦資訊。
+                        若用戶尚未設定任何電腦，則回傳一個UserComputer資訊，但是其中只有userId資訊。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="findAvailableComputers3.html" target="_blank">findAvailableComputers3（V3）</a></td>
+                    <td class="tableRow">
+                        取得指定使用者可使用的desktop電腦資訊。
+                        若用戶尚未設定任何電腦，則回傳一個UserComputer資訊，但是其中只有userId資訊。
+                        <br>
+                        此服務與 findAvailableComputers2（V2）差異在於 V3 版本不需輸入參數，但是必須提供 session id。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="connectToComputer.html" target="_blank">connectToComputer</a></td>
+                    <td class="tableRow">
+                        連線指定電腦，並回傳連線電腦基本資料與設定資訊。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="createComputerWithQRCode.html" target="_blank">connectToComputerWithQRCode</a></td>
+                    <td class="tableRow">
+                        使用指定 QR code 連線電腦，並回傳連線電腦基本資料與設定資訊。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="findUserComputerProfiles.html" target="_blank">findUserComputerProfiles</a></td>
+                    <td class="tableRow">
+                        查詢使用者電腦的設定值。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+
+            <div class="sectionHead"><a name="異動電腦資訊">異動電腦資訊</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                    <td width="20%" class="tableColumn">連線伺服器類型</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changeUploadDirectory.html" target="_blank">changeUploadDirectory</a></td>
+                    <td class="tableRow">
+                        修改使用者電腦上傳檔案預設目錄。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changeUserComputerProfiles.html" target="_blank">changeUserComputerProfiles</a></td>
+                    <td class="tableRow">
+                        修改使用者電腦的設定值。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changeShowHidden.html" target="_blank">changeShowHidden</a></td>
+                    <td class="tableRow">
+                        變更使用者在目前的 session 下的 showHidden 值。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="deleteComputerFromDevice.html" target="_blank">deleteComputerFromDevice</a></td>
+                    <td class="tableRow">
+                        刪除指定電腦。
+                    </td>
+                    <td class="tableLeft">Lug Service（但不管Socket Connect是否已連線）</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changeComputerName.html" target="_blank">changeComputerName</a></td>
+                    <td class="tableRow">
+                        變更指定電腦名稱。
+                    </td>
+                    <td class="tableLeft">Lug Service（但不管Socket Connect是否已連線）</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

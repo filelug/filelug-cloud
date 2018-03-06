@@ -1,0 +1,204 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Download File to Device (V2)</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">downloadFileToDevice2</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">下載檔案內容</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">檔案內容</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">
+                        GET http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/ddownload2
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    t=44B49ED50A8D03A43B105C7354BE89A769060DBBE9868%2Bdown%2B4E03D0AF-F522-4142-9252-98DA7783EC28
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">t</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        檔案下載 key。
+                        <b>由於此值包含「+」，傳送request前，必須將此值轉為「%2B」，否則會因為找不到相對應的 Download Group Detail 資料而下載失敗。</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow" colspan="3">無</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">Request Header 範例</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+                Authorization: 44B49EDBF1F7C40DBBE98BC568C
+                Accept: */*
+                Connection: keep-alive
+                Accept-Language: en-us
+                Accept-Encoding: gzip, deflate
+                If-Range: Fri, 19 Feb 2016 03:40:00 GMT
+                Range: bytes=32768-
+            </pre>
+
+            <div class="sectionHead">Request Header 說明</div>
+            <p>
+                「If-Range」與「Range」兩者是續傳時才需要。初始下載不可包含此二值。
+                「If-Range」是指前次下載（非續傳），收到的 response header 「Last-Modified」的值，日期格式為「EEE, dd MMM yyyy HH:mm:ss GMT」。
+                目前此值 server 與 desktop 會直接忽略，未來此值將作為 desktop 判斷檔案是否更新過，若此值與 desktop 上該檔案的最後修改日期相同，則回傳剩下的檔案，否則回傳全部的檔案內容。
+                「Range」是指要從該檔案的第幾個 index 的位元開始傳送。若該 index 值為 0，即表示要從頭下載檔案。
+                HTTP HEADER 詳細可參考：<a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">Hypertext Transfer Protocol -- HTTP/1.1</a>
+            </p>
+
+            <div class="sectionHead">回傳值說明</div>
+            <p>
+                回傳值為檔案內容，其content-type為該檔案的mime type。例如檔案為pdf檔，則content-type為「application/pdf」
+            </p>
+            <p>
+                若為初始下載，若用戶成功下載，或者下載到一半用戶取消下載或者下載到一半逾時，則回傳狀態值 200，Response Header 包含下列資訊：
+                <ul>
+                    <li>Last-Modified: Wed, 8 Apr 2015 10:00:07 GMT</li>
+                    <li>Content-Length: 67944</li>(這個值是指檔案全部大小，不是已經傳送的資料大小)
+                    <li>Accept-Ranges = bytes</li>
+                </ul>
+            </p>
+            <p>
+                若用戶請求續傳成功，則回傳狀態值 206，response header 包含下列資訊：
+            <ul>
+                <li>Last-Modified: Wed, 8 Apr 2015 10:00:07 GMT（日期格式為「EEE, dd MMM yyyy HH:mm:ss GMT」）</li>
+                <li>Content-Range: bytes 32768-67943/67944</li> (從第幾個 index 開始傳)-(傳到第幾個 index)/(整個完整檔案共有幾個 bytes)
+                <li>Content-Length: 35176</li>(這個值是本次續傳檔案傳送的位元數)
+                <li>Accept-Ranges = bytes</li>
+            </ul>
+            </p>
+            <p>
+                若 transfer key (t) 的值已經存在，必須滿足下列條件，才不會回傳錯誤碼 409：
+                <ul>
+                    <li>該筆 transfer key 下載狀態不可以是「success」</li>
+                    <li>Request Header 中包含：「Range」，且 Range 的 bytes 起始值大於 0</li>
+                </ul>
+            </p>
+
+            <div class="sectionHead">
+                回傳錯誤訊息（HTTP Status）
+                <br>
+                所有錯誤訊息都不在 response body 中顯示，以避免被認為是 partial content 資料，。
+            </div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        未指定 transfer key，或者此 transfer key 沒有對應到任何 download group。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        未提供使用者session id，或者該session id已經過期。<br>
+                        session id 必須作為 http request header「fsi」或者 「Authorization」值。詳見下方補充說明。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">可用傳輸量小於檔案大小。須先儲值後再重新執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">409</td>
+                    <td class="tableRow">
+                        檔案重複下載。<br>
+                        網路斷斷續續時，有的clients會自動重新下載，但是原來已經下載的資料並沒有被取消，仍然繼續下載，造成Client產生多個下載檔案。
+                        因此若 server 發現下載檔案key值已經存在，且該檔案已經下載成功，即回傳此錯誤碼，檔案不會傳送到Client端。
+                        若下載檔案key值已經存在，但是該檔案尚未下載成功，例如下載狀態為「失敗」或者「下載中」，則不會回傳此錯誤。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">465</td>
+                    <td class="tableRow">Desktop 版本必須大於或等於 1.1.5 才能支援下載續傳功能。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">466</td>
+                    <td class="tableRow">
+                        Device端軟體版本較舊，Desktop版本較新。
+                        Device收到此錯誤碼，應該提示使用者更新Device APP。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">470</td>
+                    <td class="tableRow">檔案超過單一檔案下載大小限制。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                則回傳錯誤訊息碼401（Unauthorized）。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

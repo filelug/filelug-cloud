@@ -1,0 +1,412 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>login</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">login</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        指定使用者登入系統。登入成功後回傳session id與系統各屬性。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">登入後的session id</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/user/login</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "account" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "passwd" : "81dc9bdb52d04dc20036dbd8313ed055",
+    "nickname" : "Jellyfish",
+    "verification" : "bf94b4d1c5305b5b3f96abdab89eba05b994ea10a249aaa3acb28aa13533040cc4b24cec2783fc3402011f3a52065c16",
+    "locale" : "zh_TW",
+    "computer-id" : 89765,            // 若不提供，則不檢查電腦端是否連線，也不通知電腦端連線。
+    "showHidden" : false,             // 若 computer-id 不提供，此值也不需提供
+    "device-version" : "1.1.7",       // 此值不需提供。此值為 Filelug APP 大版號，改紀錄於 device-token/filelug-version。
+    "device-build" : "2014.09.24.01", // 此值不需提供。此值為 Filelug APP 小版號，改紀錄於 device-token/filelug-build。
+    "device-token":
+    {
+        "device-token" : "1e39b345af9b036a2fc1066f2689143746f7d1220c23ff1491619a544a167c61",
+        "notification-type" : "APNS",
+        "device-type" : "IOS",
+        "device-version" : "8.3",           // iOS/Android 作業系統版本
+        "filelug-version" : "1.1.7",        // Filelug APP 大版號
+        "filelug-build" : "2014.09.24.01",  // Filelug APP 小版號
+        "badge-number" : 0
+    }
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">account</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者編號</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">passwd</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者密碼。此密碼為SHA-256加密後的密碼</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者暱稱</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">verification</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        驗證碼。用來確認此服務是由使用者經由授權的device執行。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">locale</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者 locale</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        此值不需要再提供，改紀錄於 device-token/filelug-version
+                        Filelug APP 的大版號，例如：1.0.0, 1.4.9，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/device-token</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">該device使用的token</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/notification-type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Remote Notification Server的類型，有效值為：
+                        <ul>
+                            <li>APNS:   For Apple</li>
+                            <li>GCM:    For Google</li>
+                            <li>BAIDU:  For Baidu</li>
+                            <li>WNS:    For Windows 8 (and later) or Windows Phone 8.1 app</li>
+                            <li>NONE:   Remote notification not supported</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/device-type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Device的作業系統類型，有效值為：
+                        <ul>
+                            <li>IOS: For apple iOS</li>
+                            <li>OSX: For apple Mac OS X</li>
+                            <li>WATCH_OS: For apple watchOS</li>
+                            <li>WIN_PHONE: For Windows Phone/Pad</li>
+                            <li>WIN_DESKTOP: For Windows desktop/server</li>
+                            <li>ANDROID: For Android</li>
+                            <li>CHROME: For ChromeOS or Chrome browser in desktop/server</li>
+                            <li>LINUX_DESKTOP: For Linux desktop/server</li>
+                            <li>MOBILE: For mobile devices such as phone and pad, if not applied to the values above</li>
+                            <li>DESKTOP: For Desktop/Server, if not applied to the values above</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/device-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        device作業系統的版號，例如：8.3, 7.1，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-id</td>
+                    <td class="tableRow">long</td>
+                    <td class="tableRow">
+                        連線電腦編號。若不提供，則不檢查電腦端是否連線，也不通知電腦端連線。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">showHidden</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">
+                        是否顯示隱藏檔。若不設定此值，則以該使用者註冊時的值為準。
+                        若 computer-id 不提供，此值也不需提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device.version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        device 的 version number 資訊。
+                        若 computer-id 不提供，此值也不需提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device.build</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        此值不需要再提供，改紀錄於 device-token/filelug-build
+                        Filelug APP 的小版號
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/filelug-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Filelug APP 的大版號，例如：1.0.0, 1.4.9，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/filelug-build</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Filelug APP 的小版號，例如：2016.09.10.01，格式為：
+                        <blockquote>yyyy.MM.dd.XX 最後兩位數為當天 commit 的第幾個 commit 的版本，例如 2016/01/22 當天第二個 commit 的版本為「2016.01.22.02」</blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/badge-number</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">
+                        badge number。此值必為正整數或者0。若此值不提供，且此device token不存在，則此值設為0。
+                        若此值不提供，且此值存在，則此值不更新。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">
+                回傳值範例：當輸入參數包含computer-id時（格式：<span>application/json</span>）
+            </div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "file.encoding": "MacRoman",
+    "java.vm.info": "mixed mode",
+    "user.dir": "/home/user1/projects",
+    "line.separator": "\n",
+    "user.name": "user1",
+    "user.home": "/Users/user1",
+    "java.home": "/Library/Java/JavaVirtualMachines/1.6.0_51-b11-457.jdk/Contents/Home",
+    "java.class.version": "50.0",
+    "sun.jnu.encoding": "MacRoman",
+    "java.io.tmpdir": "/var/folders/42/0xh_py3d4zs2dgbt2pdfybzh0000gn/T/",
+    "file.separator": "/",
+    "java.vm.vendor": "Apple Inc.",
+    "java.specification.version": "1.6",
+    "java.runtime.version": "1.6.0_51-b11-457-11M4509",
+    "user.timezone": "Asia/Taipei",
+    "java.vendor": "Apple Inc.",
+    "sun.io.unicode.encoding": "UnicodeLittle",
+    "os.arch": "x86_64",
+    "path.separator": ":",
+    "os.name": "Mac OS X",
+    "os.version": "10.8.5",
+    "java.version": "1.6.0_51",
+    "user.country": "TW",                                       // 這是Desktop的作業系統設定，不是Device端的環境
+    "user.language": "zh",                                      // 這Desktopr的作業系統設定，不是Device端的環境
+    "account": "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "sessionId": "3420CD377BAAF1B7BEDC52C374DF4BD5F9699A0D5DFAD204BD59BCB6B3668C81",
+    "nickname" : "Jellyfish",
+    "country-id" : "TW",
+    "phone" : "0975009123",
+    "email" : "jellyfish@example.com",                          // 值不一定存在
+    "showHidden" : false,
+    "computer-id" : 89765,                                      // 與輸入值相同。
+    "computer-group" : "GENERAL",
+    "computer-name" : "ALBERT'S WORKSTATION",
+    "socket-connected" : true,
+    "lug-server-id":"r1",                                       // 若 desktop 尚未連線，此值不存在。
+    "upload-directory" : "C:\Users\Administrator\Documents",    // 若用戶尚未指定，此值不存在。
+    "upload-subdirectory-type" : 4,                             // 若用戶尚未指定，此值不存在。
+    "upload-subdirectory-value" : "西藏之旅",                    // 若用戶尚未指定，此值不存在。
+    "upload-description-type" : 3,                              // 若用戶尚未指定，此值不存在。
+    "upload-description-value" : "西藏布達拉宮",                // 若用戶尚未指定，此值不存在。
+    "upload-notification-type" : 2,                           // 若用戶尚未指定，此值不存在。
+    "download-directory" : "/Storage/Emulated/0/Download",    // 若用戶尚未指定，此值不存在。
+    "download-subdirectory-type" : 4,                         // 若用戶尚未指定，此值不存在。
+    "download-subdirectory-value" : "西藏之旅",                // 若用戶尚未指定，此值不存在。
+    "download-description-type" : 3,                          // 若用戶尚未指定，此值不存在。
+    "download-description-value" : "西藏布達拉宮",              // 若用戶尚未指定，此值不存在。
+    "download-notification-type" : 2                          // 若用戶尚未指定，此值不存在。
+}
+            </pre>
+
+            <div class="sectionHead">回傳值範例：當輸入參數不包含computer-id時（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "account": "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "sessionId": "3420CD377BAAF1B7BEDC52C374DF4BD5F9699A0D5DFAD204BD59BCB6B3668C81",
+    "nickname" : "Jellyfish",
+    "country-id" : "TW",
+    "phone" : "0975009123",
+    "showHidden" : false,
+    "email" : "jellyfish@example.com",  // 值不一定存在
+}
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">socket-connected</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">
+                        說明 desktop 與 repository 的連線情況：
+                        <ul>
+                            <li>true：desktop 與 repository 連線已建立。</li>
+                            <li>
+                                false：desktop 與 repository 連線未建立。
+                                應調用服務：「Request Connection」(user/reconnect)要求desktop 建立連線。
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">lug-server-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        指定連線的lug server子網域名稱。例如：「r1」表示指定連線的lug server為「r1.filelug.com」。
+                        若 desktop 尚未連線，此值不存在。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">
+                        回傳值為登入系統後的session id與使用者屬性，
+                        若輸入參數包含 computer-id，則回傳值再包含與 desktop 相關的屬性。
+                        <br>
+                        後續的各項服務多需要此session id作為參數。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        必要參數至少一個未提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        使用者密碼與既有的不相同。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        使用者帳號尚未註冊，或者尚未驗證。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">465</td>
+                    <td class="tableRow">
+                        Device端軟體版本較新，Desktop版本較舊。
+                        Device收到此錯誤碼，應該提示使用者於電腦上下載並安裝新Desktop版本。
+                        此錯誤只有當輸入參數包含 computer-id 時才可能發生。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">466</td>
+                    <td class="tableRow">
+                        Device端軟體版本較舊，Desktop版本較新。
+                        Device收到此錯誤碼，應該提示使用者更新Device APP。
+                        此錯誤只有當輸入參數包含 computer-id 時才可能發生。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">467</td>
+                    <td class="tableRow">
+                        使用者必須變更電話號碼才能繼續使用。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">501</td>
+                    <td class="tableRow">
+                        指定的電腦尚未安裝Filelug Desktop或尚未設定。
+                        此錯誤只有當輸入參數包含 computer-id 時才可能發生。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ul>
+                    <li>取得的session id值，於後續調用其他服務時，會作為http header的「Authorization」值。</li>
+                    <li>
+                        提供 computer id 與不提供 computer id 的差別在於：
+                        <br>
+                        不提供 computer id 的服務不考慮 desktop 的資訊，也不管其與 repository 之前連線的情況。
+                        <br>
+                        提供 computer id 的服務回傳值包含「socket-connected」與「lug-server-id」值，
+                        前者表示 desktop 是否已經與 repository 連線；後者為與 desktop 建立連線的 repository
+                        主機的子網域名稱。
+                        <br>
+                        不提供 computer id 的服務回傳值不包含「socket-connected」與「lug-server-id」的值。
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

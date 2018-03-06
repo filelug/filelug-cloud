@@ -1,0 +1,159 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>downloadFile</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">downloadFileToDevice</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">下載檔案內容</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">檔案內容</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/ddownload</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "path" : "C:\\Documents and Settings\\Administrator\\My Documents\\My Pictures\\IDS258-001.png",
+    "transferKey" : "OTFDRjUxNzkwOTBEQUQ0QkU2QUVGREE2Qzg0RTUyODVFQkI4MzlBOTk0QkM5OUNCRjAyNzQzMTCc=",
+    "device-token" : "1e39b345af9b036a2fc1066f2689143746f7d1220c23ff1491619a544a167c61"
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">path</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        目錄或檔案的絕對路徑。此路徑值<b>不須要</b>encoded。<br>
+                        URL encoding的規則詳見：<a href="http://www.w3schools.com/tags/ref_urlencode.asp" target="_blank">HTML URL Encoding Reference</a>，其中的「URL Encoding Functions」可用來encode URL
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">transferKey</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">檔案下載key</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        該device使用的token。提供此值是為了遠端通知功能（例如「檔案上傳」（而非下載）完成時）能提供正確的badge number。
+                        若前端系統尚未支援遠端通知功能，可不提供此資料。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值說明</div>
+            <p>
+                回傳值為檔案內容，其content-type為該檔案的mime type。例如檔案為pdf檔，則content-type為「application/pdf」
+            </p>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">指定的目錄或檔案不存在，或者沒有讀檔的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        未提供使用者session id，或者該session id已經過期。<br>
+                        session id 必須作為 http request header「fsi」或者 「Authorization」值。詳見下方補充說明。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">可用傳輸量小於檔案大小。須先儲值後再重新執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">409</td>
+                    <td class="tableRow">
+                        檔案重複下載。<br>
+                        網路斷斷續續時，有的clients會自動重新下載，但是原來已經下載的資料並沒有被取消，仍然繼續下載，造成Client產生多個下載檔案。
+                        因此repository若發現下載檔案key值已經存在，即回傳此錯誤碼，檔案不會傳送到Client端。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">466</td>
+                    <td class="tableRow">
+                        Device端軟體版本較舊，Desktop版本較新。
+                        Device收到此錯誤碼，應該提示使用者更新Device APP。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">470</td>
+                    <td class="tableRow">檔案超過單一檔案下載大小限制。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                則回傳錯誤訊息碼401（Unauthorized）。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

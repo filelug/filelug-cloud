@@ -1,0 +1,121 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Request Lug Server Connection</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Request Lug Server Connection</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">電腦</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        取得目前適合連線的Lug Server子網域名稱。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">適合連線的Lug Server子網域名稱</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/computer/dispatch2</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">無輸入參數</div>
+
+            <div class="sectionHead">回傳值範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+  "lug-server-id":"repo1"
+}
+            </pre>
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">lug-server-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        指定連線的lug server子網域名稱。例如：「r1」表示指定連線的lug server為「r1.filelug.com」。
+                        基於測試用，若回傳的 lug-server-id 值為「aa」，表示直接連到「filelug.com」。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端提示用戶重新開啟應用程式，重新進行設定。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ul>
+                    <li>
+                        必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言)
+                        或者 header「Authorization」(對非 iOS 而言) 的值。
+                    </li>
+                    <li>
+                        若 session id 對應的 session 已經過期，仍然視為正常而回傳 lug server id，
+                        但是已經過期的 session 不更新其 last access timestamp。
+                    </li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

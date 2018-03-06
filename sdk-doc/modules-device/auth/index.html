@@ -1,0 +1,235 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>認證授權模組</title>
+</head>
+<body>
+
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">認證授權模組</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="../index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="txt">
+                <a href="#使用者管理">[使用者管理]</a>
+                <a href="#認證管理">[認證管理]</a>
+                <a href="#授權管理">[授權管理]</a>
+            </div>
+
+            <div class="sectionHead"><a name="使用者管理">使用者管理</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                    <td width="20%" class="tableColumn">連線伺服器類型</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changePassword.html" target="_blank">changePassword</a></td>
+                    <td class="tableRow">
+                        修改使用者密碼
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="sendResetPasswordSecurityCode2.html" target="_blank">sendResetPasswordSecurityCode2</a></td>
+                    <td class="tableRow">
+                        寄送驗證碼至指定電子郵件地址，作為重設使用者密碼所需。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="resetPassword.html" target="_blank">resetPassword</a></td>
+                    <td class="tableRow">
+                        重設使用者密碼
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changeNickname.html" target="_blank">changeNickname</a></td>
+                    <td class="tableRow">
+                        修改使用者暱稱
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr> 
+                <tr>
+                    <td class="tableLeft"><a href="sendChangeUserEmailSecurityCode.html" target="_blank">sendChangeUserEmailSecurityCode</a></td>
+                    <td class="tableRow">
+                        寄送驗證碼至指定電子郵件地址，作為變更電子郵件地址所需。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changeUserEmail.html" target="_blank">changeUserEmail</a></td>
+                    <td class="tableRow">
+                        變更使用者電子郵件地址。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="sendChangePhoneNumberSecurityCode.html" target="_blank">sendChangePhoneNumberSecurityCode</a></td>
+                    <td class="tableRow">
+                        寄送驗證碼至新電話號碼或者使用者的電子郵件地址，作為變更電話號碼所需。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="changePhoneNumber.html" target="_blank">changePhoneNumber</a></td>
+                    <td class="tableRow">
+                        變更使用者電話號碼。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="checkUserDeletable.html" target="_blank">checkUserDeletable</a></td>
+                    <td class="tableRow">
+                        確認使用者可以刪除，並且沒有允許其他非管理者連接此使用者所屬電腦。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="deleteUser.html" target="_blank">deleteUser</a></td>
+                    <td class="tableRow">
+                        刪除使用者。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="deleteUser2.html" target="_blank">deleteUser2</a></td>
+                    <td class="tableRow">
+                        刪除使用者（第二版）。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="createOrUpdateDeviceToken.html" target="_blank">createOrUpdateDeviceToken</a></td>
+                    <td class="tableRow">
+                        新建或更新用戶的device token值。可一次更新或新增多組。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="incrementBadgeNumber.html" target="_blank">incrementBadgeNumber</a></td>
+                    <td class="tableRow">
+                        增加或減少指定device token的badge number。可一次變更多組。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="clearBadgeNumber.html" target="_blank">clearBadgeNumber</a></td>
+                    <td class="tableRow">
+                        變更指定device token與user的badge number值為0。可一次變更多組。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="createOrUpdateUserProfile.html" target="_blank">createOrUpdateUserProfile</a></td>
+                    <td class="tableRow">
+                        新建或更新使用者基本資料。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+
+            <div class="sectionHead"><a name="認證管理">認證管理</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                    <td width="20%" class="tableColumn">連線伺服器類型</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="register.html" target="_blank">register</a></td>
+                    <td class="tableRow">註冊使用者</td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="verify.html" target="_blank">verify</a></td>
+                    <td class="tableRow">驗證註冊使用者</td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="verify2.html" target="_blank">verify2</a></td>
+                    <td class="tableRow">
+                        驗證註冊使用者。驗證成功後，系統自動登入用戶，並回傳用戶資訊。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="exchangeAccessTokenWithAuthorizationCode.html" target="_blank">exchangeAccessTokenWithAuthorizationCode</a></td>
+                    <td class="tableRow">
+                        使用 Facebook Account Kit 授權碼向 Facebook server 拿回 access token。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="loginWithAuthorizationCode.html" target="_blank">loginWithAuthorizationCode</a></td>
+                    <td class="tableRow">
+                        使用 Facebook Account Kit 授權碼登入或註冊。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="loginWithSessionId.html" target="_blank">loginWithSessionId</a></td>
+                    <td class="tableRow">
+                        使用已過期或即將過期的用戶 session 編號交換新的 session 編號。
+                    </td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="reqConnect.html" target="_blank">reqConnect</a></td>
+                    <td class="tableRow">從 device 端要求建立 server 與 desktopo 間的連線。</td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="login.html" target="_blank">login</a></td>
+                    <td class="tableRow">登入，包含是否考慮 desktop 以及其與 repository 之間的連線情況。</td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="logout.html" target="_blank">logout</a></td>
+                    <td class="tableRow">登出（尚未實作）</td>
+                    <td class="tableLeft">AA Service</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+
+            <div class="sectionHead"><a name="授權管理">授權管理</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

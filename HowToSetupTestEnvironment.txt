@@ -1,0 +1,47 @@
+1. 使用測試環境時, 於編譯前修改程式碼:
+	(1) src\main\java\org\clopuccino\db\PostgresqlDatabaseAccess.java
+		調整 initDatabase 程式碼(如下所示), 改為適當的 PostgreSQL 設定
+
+		// testing
+		dbUser = "masonhsieh";
+		dbPassword = "";
+		dbInitialSize = 10;
+		dbTestWhileIdle = true;
+		dbValidationQuery = "SELECT 1";
+		dbPoolPreparedStatement = true;
+		dbDriver = "org.postgresql.Driver";
+		dbStartUrl = "jdbc:postgresql://127.0.0.1:5432/masonhsieh";
+
+2. Setup the following system properties before startup repository:
+	(1) configuration.directory
+		--> The directory of the jetty server. For example,
+		-Dconfiguration.directory=/Users/masonhsieh/projects/Servers/jetty-9.1.5-repo
+
+	(2) run.as.AA
+		--> If the repository run as the AA server. Always set to true for testing environment.
+        For example,
+		-Drun.as.AA=true
+
+3. Make sure the jetty server support only http,
+not https and the directory structure will be like this
+(There's no https.ini under directory 'start.d'):
+
+jetty-distribution-9.1.5.v20140505
+	|
+	-- bin
+       etc
+       lib
+       logs
+       modules
+       resources
+       start.d   -- |
+       start.ini    |-- http.ini
+       start.jar    |-- jsp.ini
+       start.sh     |-- README.TXT
+       stop.sh
+       webapps
+
+4. 測試環境，與正式環境不同說明如下：
+	(1) 不接收簡訊回傳值。
+	(2) Desktop端調用「computer/dispatch」後，接收到的lug server id值永遠是「aa」。
+	(3) 資料庫連線ip永遠是127.0.0.1

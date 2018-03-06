@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="clopuccino-repository" basedir=".">
+
+    <!--每次執行 build 之前請先修改或確認 build.properties 的內容-->
+    <property file="build.properties"/>
+
+    <target name="replace.before.package">
+        <replace file="${classes.dir}/Version.properties" propertyfile="build.properties">
+            <replacefilter token="2.0.3" property="app.version"/>
+        </replace>
+    </target>
+
+    <!--
+        使用混淆後的 classes 取代未混淆的 classes
+    -->
+    <!--<target name="replace.obfuscated.classes">-->
+
+        <!--<echo>################################################################</echo>-->
+        <!--<echo>## Replaced classes with obfuscated ones                      ##</echo>-->
+        <!--<echo>################################################################</echo>-->
+
+        <!--<delete dir="${fserver.webinf.classes}/org"/>-->
+        <!--<copy todir="${fserver.webinf.classes}">-->
+            <!--<fileset dir="${fserver.obfuscate.dir}" />-->
+        <!--</copy>-->
+    <!--</target>-->
+
+    <!--
+        使用混淆後的 classes 取代未混淆的 classes
+    -->
+    <target name="war">
+        <echo>################################################################</echo>
+        <echo>## create war file                                            ##</echo>
+        <echo>################################################################</echo>
+
+        <war destfile="${war.file.path}" webxml="${war.webxml.path}">
+            <fileset dir="${fserver.path}"/>
+        </war>
+    </target>
+
+    <!--
+        清除混淆檔案及目錄
+    -->
+    <target name="clean-obfuscate" description="清除混淆檔案及目錄">
+        <echo>################################################################</echo>
+        <echo>## clear obfuscated directory                                 ##</echo>
+        <echo>################################################################</echo>
+        <delete dir="${fserver.obfuscate.dir}"/>
+    </target>
+
+</project>

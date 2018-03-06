@@ -1,0 +1,9 @@
+#
+# The file lists the default values for filelug properties that will be loaded if table not exits
+#
+# Multiple values for lug_server_domain_names are delimited by comma (,)
+# e.g. repo1,repo2
+#
+desktop_latest_version=1.0.0
+desktop_download_url=http://www.filelug.com/get/
+lug_server_domain_names=repo

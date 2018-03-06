@@ -1,0 +1,16 @@
+# Comment line when starting with character '#'
+# Given the format of each line, with delimiters: @@
+# COLUMN_NAME_TASK_ID
+# COLUMN_NAME_TASK_INTERVAL
+# COLUMN_NAME_TASK_INITIAL_DELAY
+#
+# If table c_task already exists, the file will not run at repository starts up,
+# and you need to update the data in the repository database
+# and re-start 'each' repository to start new schedules.
+#
+# If the delay seconds is small, say 10, it may lead to fail to deploy war to the application server.
+# DO NOT set the delay seconds less than '30'.
+
+repo.each.update.available.countries@@3600@@120
+repo.each.update.available.lug.servers@@3600@@150
+repo.each.reload.sns.applications@@86400@@30

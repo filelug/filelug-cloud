@@ -1,0 +1,15 @@
+{
+  "APNS_SANDBOX": {
+    "aps": {
+      "sound": "default",
+      "alert": {
+        "body": "檔案「IMG_7020.mp4」已成功上傳。",
+        "title": "檔案已成功上傳"
+      },
+      "badge": 1
+    },
+    "fl-type": "all-files-uploaded-successfully",
+//    "fl-type": "upload-file",
+    "upload-group-id": "OTFDRjUxNzjglQUMlRTglQTklQTYuUE5HKzEzOTI2MjEwMjQzNDc="
+  }
+}

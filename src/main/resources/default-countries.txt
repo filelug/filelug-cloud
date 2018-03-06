@@ -1,0 +1,21 @@
+# Comment line when starting with character '#'
+# Given the format of each line, with delimiters: @@
+# COLUMN_NAME_COUNTRY_ID
+# COLUMN_NAME_COUNTRY_CODE
+# COLUMN_NAME_COUNTRY_PHONE_NUMBER
+# COLUMN_NAME_COUNTRY_LOCALE_DEFAULT
+# COLUMN_NAME_COUNTRY_LOCALE_EN
+# COLUMN_NAME_COUNTRY_LOCALE_ZH
+# COLUMN_NAME_COUNTRY_LOCALE_ZH_TW
+# COLUMN_NAME_COUNTRY_LOCALE_ZH_HK
+# COLUMN_NAME_COUNTRY_LOCALE_ZH_CN
+# COLUMN_NAME_COUNTRY_LOCALE_JA_JP
+# ...(other country locales which may be added later as system required)
+# COLUMN_NAME_COUNTRY_AVAILABLE
+#
+TW@@886@@0975009123@@Taiwan@@Taiwan@@台湾@@臺灣@@臺灣@@台湾@@台湾@@TRUE
+SG@@65@@09334603697@@Singapore@@Singapore@@新加坡@@新加坡@@新加坡@@新加坡@@シンガポール@@FALSE
+CN@@86@@13053172829@@China@@China@@中国@@中國@@中國@@中国@@中国@@FALSE
+US@@1@@9708146733@@U.S.@@U.S.@@美国@@美國@@美國@@美国@@米国@@FALSE
+GB@@44@@07745352515@@U.K.@@U.K.@@英国@@英國@@英国@@英国@@英国@@FALSE
+HK@@852@@69701700@@Hong Kong@@Hong Kong@@香港@@香港@@香港@@香港@@香港@@FALSE

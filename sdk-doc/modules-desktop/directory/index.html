@@ -1,0 +1,117 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>檔案目錄模組</title>
+</head>
+<body>
+
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">檔案目錄模組</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="../index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="txt">
+                <a href="#查詢檔案目錄資訊">[查詢檔案目錄資訊]</a>
+                <a href="#上傳下載檔案">[上傳下載檔案]</a>
+            </div>
+
+            <div class="sectionHead"><a name="系統查訊">查詢檔案目錄資訊</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                    <td width="20%" class="tableColumn">連線伺服器類型</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+
+            <div class="sectionHead"><a name="上傳下載檔案">上傳下載檔案</a></div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td width="20%" class="tableColumn">名稱</td>
+                    <td class="tableColumn">功能</td>
+                    <td width="20%" class="tableColumn">連線伺服器類型</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="downloadFileToDesktop.html" target="_blank">downloadFileToDesktop</a></td>
+                    <td class="tableRow">
+                        從 server 下載檔案到 Desktop（Device端上傳檔案時，Desktop端使用此服務下載檔案）
+                    </td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="downloadFileToDesktop2.html" target="_blank">downloadFileToDesktop2</a></td>
+                    <td class="tableRow">
+                        從 server 下載檔案到 Desktop（V2）（Device端上傳檔案時，Desktop端使用此服務下載檔案）。此服務支援續傳。
+                        此服務「不適用」於 device 與 desktop 版本皆為 2.0.0 或者以上的版本。
+                    </td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="downloadFileToDesktop3.html" target="_blank">downloadFileToDesktop3</a></td>
+                    <td class="tableRow">
+                        從 server 下載檔案到 Desktop（V3）（Device端上傳檔案時，Desktop端使用此服務下載檔案）。
+                        此服務支援續傳，method 改為 GET，而且必須提供 desktop session id。
+                        此服務只適用於 device 與 desktop 版本皆為 2.0.0 或者以上的版本。
+                    </td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="uploadFileFromDesktop.html" target="_blank">uploadFileFromServer</a></td>
+                    <td class="tableRow">
+                        上傳檔案到 server（Device端下載檔案時，Desktop端使用此服務上傳檔案）。此服務支援續傳。
+                    </td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="uploadFileFromDesktop2.html" target="_blank">uploadFileFromServer2</a></td>
+                    <td class="tableRow">
+                        上傳檔案到 server（V2）（Device端下載檔案時，Desktop端使用此服務上傳檔案）。此服務支援續傳。
+                        此服務「不適用」於 device 與 desktop 版本皆為 2.0.0 或者以上的版本。
+                    </td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="uploadFileFromDesktop3.html" target="_blank">uploadFileFromServer3</a></td>
+                    <td class="tableRow">
+                        上傳檔案到 server（V3）（Device端下載檔案時，Desktop端使用此服務上傳檔案）。此服務支援續傳，而且必須提供 desktop session id。
+                        此服務只不適用於 device 與 desktop 版本皆為 2.0.0 或者以上的版本。
+                    </td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+                <tr>
+                    <td class="tableLeft"><a href="cancelDownloadFileFromServer.html" target="_blank">cancelDownloadFileFromServer</a></td>
+                    <td class="tableRow">取消執行中的檔案下載</td>
+                    <td class="tableLeft">Lug Service</td>
+                </tr>
+            </table>
+            <div class="txt">
+                <div align="right"><a href="#">↑回頂端</a></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

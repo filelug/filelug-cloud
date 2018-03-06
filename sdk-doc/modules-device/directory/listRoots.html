@@ -1,0 +1,193 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>listRoots</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">listRoots</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">根目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">取得作業系統所有根目錄路徑與使用者家目錄（user home）</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">作業系統所有根目錄路徑與使用者家目錄（user home）</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/roots</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（無）</div>
+            
+            <div class="sectionHead">回傳值範例</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+[
+    {
+        "path" : "C:\Users\Administrator",
+        "realPath" : "C:\Users\Administrator",
+        "label" : "User Home",
+        "type" : "USER_HOME"
+    },
+    {
+        "path" : "C:",
+        "realPath" : "C:",
+        "label" : "C:",
+        "type" : "LOCAL_DISK"
+    },
+    {
+        "path" : "D:",
+        "realPath" : "D:",
+        "label" : "D:",
+        "type" : "DVD_PLAYER"
+    },
+    {
+        "path" : "G:",
+        "realPath" : "G:",
+        "label" : "G:",
+        "type" : "NETWORK_DISK"
+    },
+    {
+        "path" : "D:\Data",
+        "realPath" : "G:",
+        "label" : "G:",
+        "type" : "NETWORK_DISK"
+    }
+]
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">path</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        對磁碟或家目錄，此值為絕對路徑。若為一般目錄，此值可能為絕對路徑或者是捷徑所在路徑。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">realPath</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">實際路徑。若 path 為捷徑所在路徑，則此值為真實路徑。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">label</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        若為磁碟名稱，不同作業系統顯示磁碟的名稱不同，也可以依據作業系統提供的方式修改磁碟名稱。
+                        <br>
+                        對於 Linux 或 macOS，若為根目錄「/」，則顯示「Root Directory」的 i18n 值作為預設值，
+                        <br>
+                        若為家目錄名稱，則顯示「User Home」的 i18n 值作為預設值。
+                        <br>
+                        用戶可以檢查參數值「disk」為 false，得知此為「家目錄」，並依需要調整前端顯示名稱。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        目錄或磁碟的類型，有效類型包含：
+                        <ul>
+                            <li>USER_HOME：使用者家目錄</li>
+                            <li>DIRECTORY：一般資料夾，通常是給非管理者使用</li>
+                            <li>WINDOWS_SHORTCUT_DIRECTORY：Windows 資料夾捷徑，通常是給非管理者使用</li>
+                            <li>UNIX_SYMBOLIC_LINK_DIRECTORY：Unix/Linux 資料夾捷徑，通常是給非管理者使用</li>
+                            <li>MAC_ALIAS_DIRECTORY：macOS 資料夾捷徑，通常是給非管理者使用</li>
+                            <li>LOCAL_DISK：本機磁碟。若無法區分下者，則皆是為本機磁碟</li>
+                            <li>EXTERNAL_DISK：包含：usb、thunderbolt 等外接硬碟或者拇指碟</li>
+                            <li>NETWORK_DISK：包含：ftp, smb 等</li>
+                            <li>DVD_PLAYER：DVD 或 VCD 光碟機</li>
+                            <li>TIME_MACHINE：macOS 專用的 Time Machine 備份磁碟</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        session 已過期（預設有效期間為 60 分鐘，自上一次使用此 session id 調用服務的時間開始計算）。
+                        <br>
+                        收到此回傳值，前端應調用服務 <a href="../auth/loginWithSessionId.html">loginWithSessionId</a> 取回新的 session id 後再重新調用此服務。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端應提示用戶使用 Facebook Account Login 重新登入。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                則回傳錯誤訊息碼401（Unauthorized）。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>createOrUpdateDeviceToken</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">createOrUpdateDeviceToken</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        新建或更新用戶的device token值。
+                        對應的session可能有一到多個，這些session對應的device token也一併更新。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">
+                        成功建立或更新的資料。
+                        已存在的device token資訊，就算完全沒有變更，也會回傳。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/user/device-token</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "sessions" :
+    [
+        "3420CD377BAAF1B7BEDC52C374DF4BD5F9699A0D5DFAD204BD59BCB6B3668C81",
+        "ADC3420CD37C81D5F9699A4DFAF1B77B52C3768BE4BD204BD59BCB6B360D5DFA"
+    ],
+
+    "device-token":
+    {
+        "device-token" : "1e39b345af9b036a2fc1066f2689143746f7d1220c23ff1491619a544a167c61",
+        "notification-type" : "APNS",
+        "device-type" : "IOS",
+        "device-version" : "8.3",
+        "filelug-version" : "1.1.7",
+        "filelug-build" : "2015.09.22.01",
+        "badge-number" : 0
+    }
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">該device使用的token</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">notification-type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Remote Notification Server的類型，有效值為：
+                        <ul>
+                            <li>APNS:   For Apple</li>
+                            <li>GCM:    For Google</li>
+                            <li>BAIDU:  For Baidu</li>
+                            <li>WNS:    For Windows 8 (and later) or Windows Phone 8.1 app</li>
+                            <li>NONE:   Remote notification not supported</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Device的作業系統類型，有效值為：
+                        <ul>
+                            <li>IOS: For apple iOS</li>
+                            <li>OSX: For apple Mac OS X</li>
+                            <li>WATCH_OS: For apple watchOS</li>
+                            <li>WIN_PHONE: For Windows Phone/Pad</li>
+                            <li>WIN_DESKTOP: For Windows desktop/server</li>
+                            <li>ANDROID: For Android</li>
+                            <li>CHROME: For ChromeOS or Chrome browser in desktop/server</li>
+                            <li>LINUX_DESKTOP: For Linux desktop/server</li>
+                            <li>MOBILE: For mobile devices such as phone and pad, if not applied to the values above</li>
+                            <li>DESKTOP: For Desktop/Server, if not applied to the values above</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        device作業系統的版號，例如：8.3, 7.1，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">filelug-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Filelug APP的大版號，例如：1.0.0, 1.4.9，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">filelug-build</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Filelug APP的小版號，例如：2016.09.10.01，格式為：
+                        <blockquote>yyyy.MM.dd.XX 最後兩位數為當天 commit 的第幾個 commit 的版本，例如 2016/01/22 當天第二個 commit 的版本為「2016.01.22.02」</blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">badge-number</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">
+                        badge number。此值必為正整數或者0。若此值不提供，且此device token不存在，則此值設為0。
+                        若此值不提供，且此值存在，則此值不更新。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        可能的情況如下，詳細資訊顯示於回傳文字訊息。
+                        <ul>
+                            <li>必要參數不存。</li>
+                            <li>notification-type值不合法或者尚未實作。若輸入參數其中一組的notification-type尚未實作或者不合法，將導致部分處理成功，部分處理失敗。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        session 已過期（預設有效期間為 60 分鐘，自上一次使用此 session id 調用服務的時間開始計算）。
+                        <br>
+                        收到此回傳值，前端應調用服務 <a href="../auth/loginWithSessionId.html">loginWithSessionId</a> 取回新的 session id 後再重新調用此服務。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端應提示用戶使用 Facebook Account Login 重新登入。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                則回傳錯誤訊息碼401（Unauthorized）。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

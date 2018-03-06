@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>deleteDirectory</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">deleteDirectory（尚未實作）</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">刪除目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">被刪除的目錄資訊</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">DELETE http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/delete/{forever}/{path}</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">path</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        待刪除的目錄絕對路徑。此路徑必須為encode後的路徑。<br>
+                        例如路徑「C:\\Documents and Settings\\Administrator\\My Documents\\My Pictures」
+                        經過encode後為「C%3A%5CDocuments%20and%20Settings%5CAdministrator%5CMy%20Documents%5CMy%20Pictures」。<br>
+                        URL encoding的規則詳見：<a href="http://www.w3schools.com/tags/ref_urlencode.asp" target="_blank">HTML URL Encoding Reference</a>，其中的「URL Encoding Functions」可用來encode URL
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">forever</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">
+                        是否永久刪除。若要永久刪除就設為true；若要丟到資源回收桶，則設為false。
+                        <b>目前不支援丟到資源回收桶，因此此值只能是true</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "symlink":false,
+    "name":"每日五蔬果 癌症遠離我",
+    "parent":"/Users/clopuccino/Documents",
+    "readable":true,
+    "writable":true,
+    "executable":true,
+    "hidden":false,
+    "lastModified":"2013/03/08 14:51:55 GMT+0800",
+    "type":"DIRECTORY",
+    "contentType":"application/directory"
+}
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">symlink</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否為symbolic link</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">name</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">目錄名稱。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">parent</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">父目錄絕對路徑</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">readable</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否有讀的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">writable</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否有寫的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">executable</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否有執行的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">hidden</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">
+                        是否為隱藏檔。
+                        若指定的目錄名稱（URL encode前）是以「.」開頭，此值即為true，否則為false
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">lastModified</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">最後修改日期。格式為「yyyy/MM/dd HH:mm:ss 'GMT'Z」</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        目錄或檔案。目錄值為「DIRECTORY」、檔案值為「FILE」。
+                        對此此服務而言，由於是目錄，因此值永遠是「DIRECTORY」
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">contentType</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        對此此服務而言，由於type為「DIRECTORY」時，故此值永遠是「application/directory」。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        可能是下面其中之一造成：
+                        <ul>
+                            <li>未指定來源目錄絕對路徑</li>
+                            <li>未指定目的地目錄絕對路徑</li>
+                            <li>待刪除的目錄絕對路徑（即參數path）不存在於作業系統中</li>
+                            <li>參數path是檔案路徑，而不是目錄路徑</li>
+                            <li>參數forever值為false</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        未提供使用者session id，或者該session id已經過期。<br>
+                        session id 必須作為 http request header「fsi」或者 「Authorization」值。詳見下方補充說明。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">使用者對待刪除的目錄沒有寫（write）的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ul>
+                    <li>
+                        必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                        系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                        若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                        則回傳錯誤訊息碼401（Unauthorized）。
+                    <li>
+                        回傳的Response Header包含 field：「Change-Timestamp」，
+                        其值為Desktop端資料異動的時間戳記（單位為millisecond），形態為長整數（long）。
+                    </li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

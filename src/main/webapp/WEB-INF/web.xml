@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+    <display-name>repository</display-name>
+
+    <filter>
+        <filter-name>GzipFilter</filter-name>
+        <filter-class>org.eclipse.jetty.servlets.GzipFilter</filter-class>
+        <!-- Must set to true if any async-supported servlet that filtered by this -->
+        <async-supported>true</async-supported>
+        <init-param>
+            <param-name>mimeTypes</param-name>
+            <param-value>application/json</param-value>
+        </init-param>
+    </filter>
+    <!--<filter>-->
+    <!--<filter-name>LoggerFilter</filter-name>-->
+    <!--<filter-class>org.clopuccino.LoggerFilter</filter-class>-->
+    <!--</filter>-->
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--<filter-mapping>-->
+    <!--<filter-name>LoggerFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <filter-mapping>
+        <filter-name>ClientSession</filter-name>
+
+        <url-pattern>/user/uprofile</url-pattern>
+        <url-pattern>/user/change-email</url-pattern>
+        <url-pattern>/user/nickname</url-pattern>
+        <url-pattern>/user/password</url-pattern>
+        <url-pattern>/user/check-deletable</url-pattern>
+        <url-pattern>/user/clear-badge-number</url-pattern>
+        <url-pattern>/user/device-token</url-pattern>
+        <url-pattern>/user/delete</url-pattern>
+        <url-pattern>/user/delete2</url-pattern>
+        <url-pattern>/user/tcapacity</url-pattern>
+        <url-pattern>/user/badge-number</url-pattern>
+        <url-pattern>/user/reconnect</url-pattern>
+        <url-pattern>/user/change-email-code</url-pattern>
+
+        <url-pattern>/computer/connect-to-computer</url-pattern>
+        <url-pattern>/computer/create-with-qrcode</url-pattern>
+        <url-pattern>/computer/available3</url-pattern>
+        <url-pattern>/computer/showHidden</url-pattern>
+        <url-pattern>/computer/udir</url-pattern>
+        <url-pattern>/computer/ucprofiles</url-pattern>
+        <url-pattern>/computer/available3</url-pattern>
+        <url-pattern>/computer/profiles</url-pattern>
+        <url-pattern>/computer/delete2</url-pattern>
+        <url-pattern>/computer/name</url-pattern>
+
+        <url-pattern>/directory/ddcancel</url-pattern>
+        <url-pattern>/directory/dcdownload</url-pattern>
+        <url-pattern>/directory/dcupload</url-pattern>
+        <url-pattern>/directory/dcupload2</url-pattern>
+        <url-pattern>/directory/ddownload-sum</url-pattern>
+        <url-pattern>/directory/ddownload-sum2</url-pattern>
+        <url-pattern>/directory/dupload-sum</url-pattern>
+        <url-pattern>/directory/dupload-sum2
+        </url-pattern>
+        <url-pattern>/directory/ddownload</url-pattern>
+        <!-- Invalid session is allowed for resume download -->
+        <!--<url-pattern>/directory/ddownload2</url-pattern>-->
+        
+        <url-pattern>/directory/rename</url-pattern>
+        <url-pattern>/directory/dhis</url-pattern>
+        <url-pattern>/directory/uhis</url-pattern>
+        <url-pattern>/directory/find</url-pattern>
+        <url-pattern>/directory/find-dupload</url-pattern>
+        <url-pattern>/directory/list</url-pattern>
+        <url-pattern>/directory/roots</url-pattern>
+        <url-pattern>/directory/replace-download</url-pattern>
+        <url-pattern>/directory/replace-upload</url-pattern>
+        <url-pattern>/directory/dupload</url-pattern>
+        <url-pattern>/directory/dupload2</url-pattern>
+        <!-- Invalid session is allowed for resume upload -->
+        <!--<url-pattern>/directory/dupload3</url-pattern>-->
+
+        <url-pattern>/rootDirectories</url-pattern>
+
+        <url-pattern>/bookmarks</url-pattern>
+        <url-pattern>/bookmarks/new</url-pattern>
+        <url-pattern>/bookmarks/delete</url-pattern>
+        <url-pattern>/bookmarks/find</url-pattern>
+        <url-pattern>/bookmarks/synchronize</url-pattern>
+        <url-pattern>/bookmarks/change</url-pattern>
+
+        <url-pattern>/product/newMultiplePurchases</url-pattern>
+        <url-pattern>/product/newPurchase</url-pattern>
+        <url-pattern>/product/findByVendor</url-pattern>
+        <url-pattern>/product/findPurchasesByUser</url-pattern>
+
+        <url-pattern>/system/dping</url-pattern>
+        <url-pattern>/system/dupdate</url-pattern>
+
+        <url-pattern>/country/available</url-pattern>
+
+        <!-- desktop services -->
+        <url-pattern>/ping3</url-pattern>
+        <url-pattern>/directory/supload3</url-pattern>
+        <url-pattern>/directory/sdownload3</url-pattern>
+        <url-pattern>/user/approved2</url-pattern>
+        <url-pattern>/computer/rmusers</url-pattern>
+        <url-pattern>/user/loginau</url-pattern>
+
+    </filter-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

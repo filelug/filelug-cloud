@@ -1,0 +1,39 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC
+        "-//Mort Bay Consulting//DTD Configure//EN"
+        "http://www.eclipse.org/jetty/configure_9_0.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <Set name="contextPath">/crepo</Set>
+    <!-- (1) Not working! -->
+    <!--<Call name="addServerClass">-->
+        <!--<Arg>org.eclipse.jetty.server.HttpOutput</Arg>-->
+    <!--</Call>-->
+
+    <!-- (2) Not working! -->
+    <!--<Call name="addServerClass">-->
+        <!--<Arg>-org.eclipse.jetty.server.HttpOutput</Arg>-->
+    <!--</Call>-->
+
+    <!-- (3) Not working! -->
+    <!--<Set name="parentLoaderPriority">true</Set>-->
+    <!--<Call name="addServerClass">-->
+        <!--<Arg>-org.eclipse.jetty.server.HttpOutput</Arg>-->
+    <!--</Call>-->
+
+    <!-- (4) Not working! -->
+    <!--<Set name="parentLoaderPriority">true</Set>-->
+    <!--<Call name="addServerClass">-->
+        <!--<Arg>org.eclipse.jetty.server.HttpOutput</Arg>-->
+    <!--</Call>-->
+
+    <!--
+        (5) Working!!
+         Remember that the scope of the dependencies related (directly or indirectly) with jetty-server*.jar
+         shoule set to 'provided' in the pom.xml, so there's no jetty-server*.jar in the WEB-INF/lib of the war file.
+    -->
+    <Set name="parentLoaderPriority">true</Set>
+    <Call name="prependServerClass">
+        <Arg>-org.eclipse.jetty.server.HttpOutput</Arg>
+    </Call>
+</Configure>

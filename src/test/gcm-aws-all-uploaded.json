@@ -1,0 +1,15 @@
+{
+  "GCM": {
+    "data": {
+      "title": "message title...",
+      "body": "message detail...",
+      "badge": 5,
+      // notification type, valid value are "upload-file" and "all-files-uploaded-successfully"
+      "fl-type": "all-files-uploaded-successfully",
+      "upload-group-id": "OTFDRjUxNzjglQUMlRTglQTklQTYuUE5HKzEzOTI2MjEwMjQzNDc="
+    },
+    // device token
+    "to": "APA91bHun4MxP5egoKMwt2KZFBaFUH-1RYqx..."
+  }
+}
+

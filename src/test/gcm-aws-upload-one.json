@@ -1,0 +1,18 @@
+{
+  "GCM": {
+    // --> Android APP收到的資訊從此開始，不包含tag: "GCM"
+    "data": {
+      "title": "message title...",
+      "body": "message detail...",
+      "badge": 5,
+      // notification type, valid value are "upload-file" and "all-files-uploaded-successfully"
+      "fl-type": "upload-file",
+      // upload-key
+      "transfer-key": "1329C8D721F6E09E7936954B212B6407CA07545D1C1696B53FE164E8B199553BE",
+      // transfer status, valid values are "success" and "failure"
+      "transfer-status": "success"
+    },
+    // device token
+    "to": "APA91bHun4MxP5egoKMwt2KZFBaFUH-1RYqx..."
+  }
+}

@@ -1,0 +1,192 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>repository desktop API: disconnect2</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">disconnect2</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/disconnect2</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        Desktop管理者向Repository要求斷線指定使用者。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "account" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "adminAccount" : "TW-0966777098"
+    "passwd" : "81dc9bdb52d04dc20036dbd8313ed055",
+    "nickname" : "Jellyfish",
+    "verification" : "bf94b4d1c5305b5b3f96abdab89eba05b994ea10a249aaa3acb28aa13533040cc4b24cec2783fc3402011f3a52065c16",
+    "computer-id" : 3837763637383939
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">account</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者帳號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">adminAccount</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">管理者帳號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">passwd</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">管理者密碼。此密碼為SHA-256加密後的密碼</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">管理者暱稱</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">verification</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">驗證碼。用來確認此服務是由管理者經由授權的device執行，而不是機器在執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">computer-id</td>
+                    <td class="tableRow">long</td>
+                    <td class="tableRow">斷線電腦編號</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow" colspan="3">無</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        使用者或者管理者帳號、或密碼沒有提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        管理者密碼錯誤。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        使用者或管理者帳號尚未註冊。須要先執行register服務註冊該使用者賬號。
+                        或者使用者或管理者已經註冊，但是尚未確認。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">460</td>
+                    <td class="tableRow">
+                        此電腦不存在。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">461</td>
+                    <td class="tableRow">
+                        此電腦管理者帳號不符，不是這台電腦的管理者。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">462</td>
+                    <td class="tableRow">
+                        使用者尚未申請加入此電腦。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">463</td>
+                    <td class="tableRow">
+                        使用者申請加入此電腦，但是管理者尚未核准。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                系統收到請求後，預設會延遲 5 秒後再斷線。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

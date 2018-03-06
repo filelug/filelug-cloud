@@ -1,0 +1,27 @@
+# Comment line when starting with character '#'
+
+# Given the format of each line for Table product, with delimiters: @@
+# COLUMN_NAME_PRODUCT_ID
+# COLUMN_NAME_VENDOR
+# COLUMN_NAME_VENDOR_PRODUCT_TYPE
+# COLUMN_NAME_TRANSFER_BYTES
+# COLUMN_NAME_DISPLAYED_TRANSFER_CAPACITY
+# COLUMN_NAME_PRODUCT_IS_UNLIMITED
+
+product:
+i2g@@apple@@Consumable@@2147483648@@2GB@@FALSE
+
+
+# Given the format of each line for Table product-detail, with delimiters: @@
+# COLUMN_NAME_PRODUCT_DETAIL_ID
+# COLUMN_NAME_PRODUCT_ID
+# COLUMN_NAME_PRODUCT_LOCALE
+# COLUMN_NAME_PRODUCT_NAME
+# COLUMN_NAME_PRODUCT_PRICE
+# COLUMN_NAME_PRODUCT_DISPLAYED_PRICE
+# COLUMN_NAME_PRODUCT_DESCRIPTION
+
+product-detail:
+i2g|en@@i2g@@en@@2GB transmission capacity@@0.99@@US$ 0.99@@Additional 2GB transmission capacity for file download and upload. The transmission capacity reduces as you download and upload files successfully.
+i2g|zh_TW@@i2g@@zh_TW@@2GB 檔案傳輸容量@@30@@NT$ 30@@檔案傳輸容量新增2GB。傳輸容量隨著檔案下載與上傳成功而減少，例如：下載或上傳一個10MB的檔案，檔案傳輸容量就減少10MB。
+i2g|zh_CN@@i2g@@zh_CN@@2GB 档案传输容量@@6.00@@CN¥ 6.00@@档案传输容量新增2GB。传输容量随着档案下载与上传成功而减少，例如：下载或上传一个10MB的档案，档案传输容量就减少10MB。

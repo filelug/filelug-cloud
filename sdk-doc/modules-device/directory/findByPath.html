@@ -1,0 +1,258 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>findByPath</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">findByPath</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">檔案目錄</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">取得指定目錄或檔案的資訊</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">指定目錄或檔案的資訊</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/directory/find</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "path" : "C:\\Documents and Settings\\Administrator\\My Documents\\My Pictures\\IDS258-001.png",
+    "calculateSize" : true
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">path</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        目錄或檔案的絕對路徑。此路徑值<b>不須要</b>encoded。<br>
+                        URL encoding的規則詳見：<a href="http://www.w3schools.com/tags/ref_urlencode.asp" target="_blank">HTML URL Encoding Reference</a>，其中的「URL Encoding Functions」可用來encode URL
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">calculateSize</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">
+                        值為true或false。
+                        是否顯示目錄或檔案大小（size）。
+                        目錄大小顯示該目錄下各階層子目錄與檔案大小總和。預設值為false，即不顯示。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例（目錄、顯示大小）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "symlink":false,
+    "name":"Live Music Collection",
+    "parent":"/Users/clopuccino/Music/iTunes/iTunes Media/Music",
+    "readable":true,
+    "writable":true,
+    "executable":true,
+    "displaySize":"10.59 MB",
+    "hidden":false,
+    "lastModified":"2013/03/08 14:51:55 GMT+0800",
+    "type":"DIRECTORY",
+    "contentType":"application/directory"
+}
+            </pre>
+
+            <div class="sectionHead">回傳值範例（檔案、顯示大小）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "symlink":false,
+    "name":"Cookbook.pdf",
+    "parent":"/Users/clopuccino/Downloads",
+    "readable":true,
+    "writable":true,
+    "executable":false,
+    "displaySize":"7 MB",
+    "hidden":false,
+    "lastModified":"2013/03/31 08:32:55 GMT+0800",
+    "type":"FILE",
+    "contentType":"application/pdf"
+}
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">屬性名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">symlink</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否為symbolic link。對Windows作業系統而言，此值永遠是false。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">name</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">檔案或子目錄名稱。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">parent</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">父目錄。亦即參數path經過URL decode後的值</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">readable</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否有讀的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">writable</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否有寫的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">executable</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否有執行的權限</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">hidden</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否為隱藏檔</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">lastModified</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">最後修改日期。格式為「yyyy/MM/dd HH:mm:ss 'GMT'Z」</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        目錄或檔案。目錄值以「DIRECTORY」結尾、檔案值以「FILE」結尾。
+                        有效值包含：
+                        <ul>
+                            <li>FILE,</li>
+                            <li>DIRECTORY,</li>
+                            <li>WINDOWS_SHORTCUT_FILE,</li>
+                            <li>WINDOWS_SHORTCUT_DIRECTORY,</li>
+                            <li>UNIX_SYMBOLIC_LINK_FILE,</li>
+                            <li>UNIX_SYMBOLIC_LINK_DIRECTORY,</li>
+                            <li>MAC_ALIAS_FILE,</li>
+                            <li>MAC_ALIAS_DIRECTORY</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">contentType</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        type值以「DIRECTORY」時，此值永遠是「application/directory」。
+                        若type值以「FILE」結尾時，此值依據檔案內容形態決定，詳見<a href="http://en.wikipedia.org/wiki/MIME" target="_blank">MIME on Wikipedia</a> 。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要屬性</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">displaySize</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        目錄或檔案大小（size）。
+                        目錄大小顯示該目錄下各階層子目錄與檔案大小總和。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">指定的目錄或檔案路徑不存在、或者calculateSize不為true/false。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        session 已過期（預設有效期間為 60 分鐘，自上一次使用此 session id 調用服務的時間開始計算）。
+                        <br>
+                        收到此回傳值，前端應調用服務 <a href="../auth/loginWithSessionId.html">loginWithSessionId</a> 取回新的 session id 後再重新調用此服務。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端應提示用戶使用 Facebook Account Login 重新登入。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">503</td>
+                    <td class="tableRow">
+                        server 與 desktop 間尚未建立連線。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言) 或者 header「Authorization」(對非 iOS 而言) 的值。<br>
+                系統提供此服務前，先驗證此 session id 的值是否為有效的 session id，
+                若session id不存在或者已過期（預設有效期間為60分鐘，自上一次使用此session id調用服務的時間開始計算），
+                則回傳錯誤訊息碼401（Unauthorized）。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

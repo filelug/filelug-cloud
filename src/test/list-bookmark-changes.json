@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1388908308636,
+        "path": "/Users/masonhsieh/Music/iTunes/iTunes Media/Music",
+        "label": "音樂",
+        "userId": "benius@gmail.com",
+        "type": "DIRECTORY"
+    },
+    {
+        "id": 1388908308633,
+        "path": "/Users/masonhsieh/Music/iTunes/iTunes Media/Home Videos",
+        "label": "影片",
+        "userId": "benius@gmail.com",
+        "type": "DIRECTORY"
+    },
+    {
+        "id": 1388908308630,
+        "path": "/Users/masonhsieh/Documents",
+        "label": "文件",
+        "userId": "benius@gmail.com",
+        "type": "DIRECTORY"
+    },
+    {
+        "id": 1388908308608,
+        "path": "/Users/masonhsieh/Downloads",
+        "label": "下載區",
+        "userId": "benius@gmail.com",
+        "type": "DIRECTORY"
+    },
+    {
+        "id": 1388908308592,
+        "path": "/Users/masonhsieh/Pictures/screensaver_babies",
+        "label": "照片（經典）",
+        "userId": "benius@gmail.com",
+        "type": "DIRECTORY"
+    }
+]

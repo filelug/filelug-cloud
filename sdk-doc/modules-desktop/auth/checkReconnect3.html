@@ -1,0 +1,204 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>checkReconnect3</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">check reconnect(V3)</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/ping3</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        檢查指定使用者電腦是否要求desktop建立連線。支援檢查多個使用者電腦。
+                        <br>
+
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+[
+"a15d89ce20ec48b5c451e8d73a4ef59f26484234192ef659cb2544b1278ea",
+"4ef59f26484234192ef8b5c451e8d73a4ef192ef659cbad89cec48b5c451b",
+"c15d89c4ef59f264484234192ef659cba772544b1278eaf6592544b1278ec"
+]
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow"></td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">加密後的使用者電腦編號</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+[
+    {
+        "user-id" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+        "need-reconnect" : "true",
+        "connected" : "false"
+    },
+    {
+        "user-id" : "8baa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc341",
+        "need-reconnect" : "true",
+        "connected" : "true" // 可能發生就算連線已經存在，但是就是連不到 --> 強制斷線重連
+    },
+    {
+        "user-id" : "7caa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc342",
+        "need-reconnect" : "false",
+        "connected" : "true"
+    },
+    {
+        "user-id" : "6daa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc343",
+        "need-reconnect" : "false",
+        "connected" : "true"
+    }
+]
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">user-id</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者帳號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">need-reconnect</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否需要重新連線。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">connected</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">連線是否存在。</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">200</td>
+                    <td class="tableRow">
+                        查詢成功，就算輸入參數其中包含一部分的使用者電腦不存在。
+                        回傳值只會包含存在的使用者電腦的資訊。
+                        但是若輸入參數的使用者電腦電腦編號沒有一個是存在的，則回傳錯誤碼400。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        未指定任何使用者電腦編號、
+                        指定的使用者電腦編號全部不存在、
+                        或者這些使用者電腦編號不是指向同一台電腦。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        session 已過期。
+                        <br>
+                        收到此回傳值，前端提示用戶重新連線。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端提示用戶顯示 QR code，重新進行設定。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                <ol>
+                    <li>
+                        必須先登入系統，取得有效的session id，以作為此服務的 header「fsi」(對 iOS 而言)
+                        或者 header「Authorization」(對非 iOS 而言) 的值。
+                    </li>
+                    <li>
+                        若輸入參數中其中有不存在的使用者電腦資料，則不回傳此使用者電腦連線資料。
+                    </li>
+                    <li>
+                        若發生其他錯誤，回傳狀態為 500（INTERNAL SERVER ERROR）。
+                    </li>
+                </ol>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

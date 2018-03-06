@@ -1,0 +1,154 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Find Approved Connection Users of A Computer(V2)</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Find approved connection users of a computer(V2)</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        取得允許存取指定電腦的非管理者用戶資訊。此版本使用 session id 取代輸入用戶資訊為參數。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">回傳值</td>
+                    <td class="tableRow">允許存取指定電腦的非管理者用戶資訊。</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/user/approved2</td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（無參數）</div>
+
+            <div class="sectionHead">回傳值範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+[
+    {
+        "account" : "9af3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+        "nickname" : "Charles-Émile Reynaud",
+        "showHidden" : false,
+        "allowAlias" : true
+    },
+    {
+        "account" : "4ef59f26488fc451e8d73a4ef192ef659cbad89cec48b5c451b",
+        "nickname" : "Louis Daguerre",
+        "showHidden" : false,
+        "allowAlias" : true
+    }
+]
+            </pre>
+
+            <div class="sectionHead">回傳值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">account</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者帳號。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者暱稱</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">showHidden</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否顯示隱藏檔。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">allowAlias</td>
+                    <td class="tableRow">boolean</td>
+                    <td class="tableRow">是否顯示目錄與檔案連結。</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">（無）</td>
+                    <td class="tableRow"></td>
+                    <td class="tableRow"></td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        該 session 未指定任何使用者或電腦編號。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">401</td>
+                    <td class="tableRow">
+                        desktop session id 已經過期。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">403</td>
+                    <td class="tableRow">
+                        session 不存在。或者該 session 所對應的用戶不存在。
+                        <br>
+                        收到此回傳值，前端提示用戶重新開啟應用程式，重新進行設定。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">460</td>
+                    <td class="tableRow">
+                        此電腦不存在。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                無
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

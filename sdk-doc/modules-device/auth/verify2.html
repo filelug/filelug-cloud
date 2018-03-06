@@ -1,0 +1,249 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel=stylesheet type="text/css" href="../../css/doc.css">
+    <title>Verify Registration</title>
+</head>
+<body>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="sectionHead">
+                <tr>
+                    <td height="30px">Verify Registration</td>
+                    <td width="20%">
+                        <div class="txt" align="right"><a href="index.html">回上一層</a></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableColumn" width="10%">模組</td>
+                    <td class="tableRow">認證授權</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">URL</td>
+                    <td class="tableRow">POST http://&lt;domain&gt;:&lt;port&gt;/crepo/verify2</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">說明</td>
+                    <td class="tableRow">
+                        使用者向Repository註冊帳號，收到系統發出的驗證碼，輸入驗證碼後，調用此服務傳送驗證碼已完成註冊程序。
+                        與服務<a href="verify.html" target="_blank">verify</a>不同在於，此服務於驗證成功後，系統自動登入該用戶，並回傳用戶資訊。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">參數範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+
+{
+    "account" : "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "nickname" : "Wickie",
+    "passwd" : "81dc9bdb52d04dc20036dbd8313ed055",
+    "verification" : "bf94b4d1c5305b5b3f96abdab89eba05b994ea10a249aaa32065c16",
+    "code" : "567892",
+    "locale" : "zh_TW",
+    "device-token":  // 此值不一定存在，但是此值若存在，其內的屬性只有 badge-number 是非必要（Optional），其餘皆是必要（Mandatory）。
+    {
+        "device-token" : "1e39b345af9b036a2fc1066f2689143746f7d1220c23ff1491619a544a167c61",
+        "notification-type" : "APNS",
+        "device-type" : "IOS",
+        "device-version" : "8.3",           // iOS/Android 作業系統版本
+        "filelug-version" : "1.1.7",        // Filelug APP 大版號
+        "filelug-build" : "2014.09.24.01",  // Filelug APP 小版號
+        "badge-number" : 0
+    }
+}
+            </pre>
+
+            <div class="sectionHead">參數值說明</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="30%">名稱</td>
+                    <td class="tableHeader" width="10%">類型</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">account</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">待驗證使用者的使用者編號</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">nickname</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者暱稱</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">passwd</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者密碼。此密碼為SHA-256加密後的密碼</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">verification</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">驗證碼。用來確認此服務是由使用者經由授權的device執行，而不是機器在執行。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">code</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">使用者註冊後收到系統發出的驗證碼。此驗證碼值不是加密後的值。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">locale</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">前端調用者所處系統的語系。</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/device-token</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        該device使用的token。若上一層的device-token值存在，則此值必須提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/notification-type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Remote Notification Server的類型，有效值為：
+                        <ul>
+                            <li>APNS:   For Apple</li>
+                            <li>GCM:    For Google</li>
+                            <li>BAIDU:  For Baidu</li>
+                            <li>WNS:    For Windows 8 (and later) or Windows Phone 8.1 app</li>
+                            <li>NONE:   Remote notification not supported</li>
+                        </ul>
+                        <br>
+                        若上一層的device-token值存在，則此值必須提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/device-type</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Device的作業系統類型，有效值為：
+                        <ul>
+                            <li>IOS: For apple iOS</li>
+                            <li>OSX: For apple Mac OS X</li>
+                            <li>WATCH_OS: For apple watchOS</li>
+                            <li>WIN_PHONE: For Windows Phone/Pad</li>
+                            <li>WIN_DESKTOP: For Windows desktop/server</li>
+                            <li>ANDROID: For Android</li>
+                            <li>CHROME: For ChromeOS or Chrome browser in desktop/server</li>
+                            <li>LINUX_DESKTOP: For Linux desktop/server</li>
+                            <li>MOBILE: For mobile devices such as phone and pad, if not applied to the values above</li>
+                            <li>DESKTOP: For Desktop/Server, if not applied to the values above</li>
+                        </ul>
+                        <br>
+                        若上一層的device-token值存在，則此值必須提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/device-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        device作業系統的版號，例如：8.3, 7.1，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                        <br>
+                        若上一層的device-token值存在，則此值必須提供。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/badge-number</td>
+                    <td class="tableRow">integer</td>
+                    <td class="tableRow">
+                        badge number。
+                        若為了維持上一層device-token結構完整性一定要提供，其值必為0。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="alt">非必要參數</td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/filelug-version</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Filelug APP 的大版號，例如：1.0.0, 1.4.9，格式為：
+                        <blockquote><pre> ^\\d+(\\.\\d+)+ </pre></blockquote>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableRow">device-token/filelug-build</td>
+                    <td class="tableRow">string</td>
+                    <td class="tableRow">
+                        Filelug APP 的小版號，例如：2016.09.10.01，格式為：
+                        <blockquote>yyyy.MM.dd.XX 最後兩位數為當天 commit 的第幾個 commit 的版本，例如 2016/01/22 當天第二個 commit 的版本為「2016.01.22.02」</blockquote>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">回傳值範例（格式：<span>application/json</span>）</div>
+            <pre class="prettyprint" style="max-height: 500px; overflow: auto">
+{
+    "account": "9aaa3acb2bf8aa13533040cc4b24cec22089eba94b4d1c11f3a520656abdab5305b5b3f905b994ea10a24c16783fc340",
+    "sessionId": "3420CD377BAAF1B7BEDC52C374DF4BD5F9699A0D5DFAD204BD59BCB6B3668C81",
+    "nickname" : "Jellyfish",
+    "country-id" : "TW",
+    "phone" : "0975009123",
+    "showHidden" : false,
+    "email" : "jellyfish@example.com",  // 值不一定存在
+}
+            </pre>
+
+            <div class="sectionHead">回傳錯誤訊息（HTTP Status）</div>
+            <table width="100%" border="0" cellpadding="4" cellspacing="0" class="table">
+                <tr>
+                    <td class="tableHeader" width="10%">訊息碼</td>
+                    <td class="tableHeader">說明</td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">400</td>
+                    <td class="tableRow">
+                        參數值錯誤。無法確認註冊。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">430</td>
+                    <td class="tableRow">
+                        使用者之前已經成功確認註冊。無須再確認。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">431</td>
+                    <td class="tableRow">
+                        有找到使用者，但是其verify code錯誤。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableColumn" width="10%">432</td>
+                    <td class="tableRow">
+                        使用者不存在。可能是尚未註冊或超過確認註冊時效期間。請重新註冊。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="sectionHead">補充說明</div>
+            <div class="txtBlock">
+                使用者成功認證註冊後，server會自動登入該用戶。
+                用戶於桌機或筆電安裝與設定Filelug軟體後，再點選「設定」>「連線電腦」即可連接電腦。
+            </div>
+
+        </td>
+    </tr>
+</table>
+<table width="968" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="50px" valign="bottom" class="txt">
+            <div align="right"><a href="#">↑回頂端</a></div>
+            <div align="center">
+                <script type="text/javascript" src="../../js/copyright.js"></script>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
